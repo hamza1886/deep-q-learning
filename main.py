@@ -18,7 +18,8 @@ import time
 import random
 
 RANDOM_SEED = 5
-tf.random.set_seed(RANDOM_SEED)
+# tf.random.set_seed(RANDOM_SEED)
+tf.compat.v1.random.set_random_seed(RANDOM_SEED)
 
 env = gym.make('CartPole-v1')
 env.seed(RANDOM_SEED)
@@ -39,7 +40,8 @@ def agent(state_shape, action_shape):
     The index of the highest action (0.7) is action #1.
     """
     learning_rate = 0.001
-    init = tf.keras.initializers.HeUniform()
+    # init = tf.keras.initializers.HeUniform()
+    init = tf.compat.v1.keras.initializers.he_uniform()
     model = keras.Sequential()
     model.add(keras.layers.Dense(24, input_shape=state_shape, activation='relu', kernel_initializer=init))
     model.add(keras.layers.Dense(12, activation='relu', kernel_initializer=init))
